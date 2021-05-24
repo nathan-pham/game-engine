@@ -15,12 +15,12 @@ export default class Canvas {
             throw new Error("selected element is not an HTML5 canvas")
         }
 
-        this.ctx = this.canvas.getContext("webgl")
+        this.gl = this.canvas.getContext("webgl")
 
         this.resolution = resolution || defaultConfig.resolution
         this.resize()
 
-        if(this.ctx) {
+        if(this.gl) {
             this.clear()
         } else {
             throw new Error("webgl canvas failed to initialize")
@@ -33,9 +33,7 @@ export default class Canvas {
     }
 
     clear() {
-        const ctx = this.ctx
-
-        ctx.clearColor(0.0, 0.0, 0.0, 1.0)
-        ctx.clear(ctx.COLOR_BUFFER_BIT)
+        this.gl.clearColor(0.0, 0.0, 0.0, 1.0)
+        this.gl.clear(this.gl.COLOR_BUFFER_BIT)
     }
 }
