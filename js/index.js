@@ -13,12 +13,14 @@ const program = new ShaderLinker(vertexShader, fragmentShader).link(gl)
 
 const vertexBuffer = new VertexBuffer("square", canvas)
 
-const position = gl.getAttribLocation(program, "aVertexPosition")
+const vertexPosition = gl.getAttribLocation(program, "aVertexPosition")
+const pixelColor = gl.getUniformLocation(program, "uPixelColor")
+
+canvas.clear()
 
 gl.useProgram(program)
-gl.enableVertexAttribArray(position)
+gl.enableVertexAttribArray(vertexPosition)
+gl.uniform4fv(pixelColor, [1, 0, 0.5, 1])
 
-vertexBuffer.bind(gl)
-
-gl.vertexAttribPointer(position, vertexBuffer.size, gl.FLOAT, false, 0, 0)
+gl.vertexAttribPointer(vertexPosition, vertexBuffer.size, gl.FLOAT, false, 0, 0)
 gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)

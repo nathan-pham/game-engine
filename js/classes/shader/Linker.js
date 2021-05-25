@@ -7,7 +7,7 @@ export default class Linker {
         this.program = gl.createProgram()
         
         for(const shader of this.shaders) {
-            gl.attachShader(this.program, shader)
+            gl.attachShader(this.program, shader.compiled || shader)
         }
 
         gl.linkProgram(this.program)
