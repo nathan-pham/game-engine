@@ -4,6 +4,8 @@ import VertexBuffer from "./engine/VertexBuffer.js"
 import Object from "./engine/Object.js"
 import engine from "./engine/index.js"
 
+// pg 75 Build Your Own Game Engine
+
 const gl = engine.gl
 
 const vertexShader = await new ShaderLoader("VertexShader", gl.VERTEX_SHADER).load()
