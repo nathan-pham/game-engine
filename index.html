@@ -9,21 +9,15 @@
     <title>game-engine</title>
 
     <link rel="stylesheet" href="/css/globals.css" />
+    
+    <script id="VertexShader" type="x-shader"  src="/js/glsl/SimpleVS.glsl"></script>
+    <script id="FragmentShader" type="x-shader" src="/js/glsl/SimpleFS.glsl"></script>
+    <script src="/js/libs/gl-matrix-min.js"></script>
+    <script src="/js/index.js" type="module"></script>
 </head>
 <body>
     <canvas id="canvas">
         your browser does not support the HTML5 canvas
     </canvas>
-
-    <script id="VertexShader" type="x-shader"  src="/js/glsl/SimpleVS.glsl"></script>
-    <script id="FragmentShader" type="x-shader" src="/js/glsl/SimpleFS.glsl"></script>
-    <script src="/js/index.js" type="module"></script>
-    <!-- <script type="x-shader/x-fragment" id="FragmentShader">
-        precision mediump float;
-
-        void main(void) {
-            gl_FragColor = vec4(1, 0, 0.5, 1);
-        }
-    </script> -->
 </body>
 </html>
