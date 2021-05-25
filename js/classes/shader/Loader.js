@@ -13,14 +13,18 @@ export default class Loader {
             source = await fetch(path).then(res => res.text())
         }
 
-        let compiled = gl.createShader(this.type)
-        gl.shaderSource(compiled, source)
-        gl.compileShader(compiled)
+        this.compiled = gl.createShader(this.type)
+        gl.shaderSource(this.compiled, source)
+        gl.compileShader(this.compiled)
 
-        if(!gl.getShaderParameter(compiled, gl.COMPILE_STATUS)) {
-            throw new Error("shader failed to compile: ", gl.getShaderInfoLog(compiled))
+        if(!gl.getShaderParameter(this.compiled, gl.COMPILE_STATUS)) {
+            throw new Error("shader failed to compile: ", gl.getShaderInfoLog(this.compiled))
         }
 
-        return compiled
+        return this.compiled
+    }
+
+    dispose(gl) {
+        gl.deleteShader(this.compiled)
     }
 }

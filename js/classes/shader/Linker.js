@@ -4,16 +4,22 @@ export default class Linker {
     }
 
     link(gl) {
-        let program = gl.createProgram()
+        this.program = gl.createProgram()
+        
         for(const shader of this.shaders) {
-            gl.attachShader(program, shader)
+            gl.attachShader(this.program, shader)
         }
 
-        gl.linkProgram(program)
-        if(!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+        gl.linkProgram(this.program)
+
+        if(!gl.getProgramParameter(this.program, gl.LINK_STATUS)) {
             throw new Error("could not link shaders")
         }
 
-        return program
+        return this.program
     }
+
+    // getAttribute(gl, name) {
+    //     return gl.getAttribLocation(this.program, name)
+    // }
 }

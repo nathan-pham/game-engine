@@ -27,13 +27,22 @@ export default class Canvas {
         }
     }
 
-    resize() {
-        Object.assign(this.canvas, this.resolution)
-        Object.assign(this.canvas.style, this.resolution)
+    get aspect() {
+        return this.resolution.width / this.canvas.height
     }
 
-    clear() {
-        this.gl.clearColor(0.0, 0.0, 0.0, 1.0)
+    resize() {
+        Object.assign(this.canvas, this.resolution)
+        Object.assign(this.canvas.style, Object.keys(this.resolution).reduce((prev, curr) => ({
+            ...prev,
+            [curr]: this.resolution[curr] + "px"
+        }), {}))
+
+        this.gl.viewport(0, 0, this.resolution.width, this.resolution.height)
+    }
+
+    clear(bgColor=[0.0, 0.0, 0.0, 1.0]) {
+        this.gl.clearColor(...bgColor)
         this.gl.clear(this.gl.COLOR_BUFFER_BIT)
     }
 }
