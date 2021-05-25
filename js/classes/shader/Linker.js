@@ -22,6 +22,22 @@ export default class Linker {
         return this
     }
 
+    activate(gl) {
+
+    }
+
+    getLocation(method, name) {
+        const methods = {
+            "attribute": "getAttribLocation",
+            "uniform": "getUniformLocation"
+        }
+
+        if(methods.hasOwnProperty(method)) {
+            return engine.gl[methods[method]](this.program, name)
+        } else {
+            throw new Error("unsupported method", method, "on getAttribute")
+        }
+    }
     // getAttribute(gl, name) {
     //     return gl.getAttribLocation(this.program, name)
     // }

@@ -46,7 +46,7 @@ export default class Canvas {
         this.gl.clear(this.gl.COLOR_BUFFER_BIT)
     }
 
-    use(linker) {
+    program(linker) {
         this.gl.useProgram(linker.program || linker)
     }
 }

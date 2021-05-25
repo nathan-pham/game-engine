@@ -1,9 +1,14 @@
+import engine from "../engine.js"
+
 export default class Object {
-    constructor(gl) {
-
+    constructor(linker) {
+        this.linker = linker
     }
-    
-    render() {
 
+    render(...variables) {
+        const gl = engine.gl
+        
+        this.linker.activate(gl, ...variables)
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
     }
 }
