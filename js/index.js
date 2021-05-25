@@ -1,8 +1,8 @@
 import ShaderLoader from "./classes/shader/Loader.js"
 import ShaderLinker from "./classes/shader/Linker.js"
-import VertexBuffer from "./classes/VertexBuffer.js"
-import Object from "./classes/Object.js"
-import engine from "./engine.js"
+import VertexBuffer from "./engine/VertexBuffer.js"
+import Object from "./engine/Object.js"
+import engine from "./engine/index.js"
 
 const gl = engine.gl
 

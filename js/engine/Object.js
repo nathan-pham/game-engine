@@ -1,4 +1,4 @@
-import engine from "../engine.js"
+import engine from "./index.js"
 
 export default class Object {
     constructor(linker) {

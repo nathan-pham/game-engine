@@ -1,4 +1,4 @@
-import engine from "../engine.js"
+import engine from "../engine/index.js"
 
 const geometryVertices = {
     square: {
