@@ -1,11 +1,14 @@
+import engine from "../../engine.js"
+
 export default class Linker {
     constructor(...shaders) {
         this.shaders = shaders
     }
 
-    link(gl) {
+    link() {
+        const gl = engine.gl
+
         this.program = gl.createProgram()
-        
         for(const shader of this.shaders) {
             gl.attachShader(this.program, shader.compiled || shader)
         }
@@ -16,7 +19,7 @@ export default class Linker {
             throw new Error("could not link shaders")
         }
 
-        return this.program
+        return this
     }
 
     // getAttribute(gl, name) {

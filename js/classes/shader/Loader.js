@@ -1,11 +1,15 @@
+import engine from "../../engine.js"
+
 export default class Loader {
     constructor(id, type) {
         this.id = id
         this.type = type
     }
 
-    async load(gl) {
+    async load() {
         const element = document.getElementById(this.id)
+        const gl = engine.gl
+
         let source = element.firstChild?.textContent
 
         if(element.hasAttribute("src")) {
@@ -21,7 +25,7 @@ export default class Loader {
             throw new Error("shader failed to compile: ", gl.getShaderInfoLog(this.compiled))
         }
 
-        return this.compiled
+        return this
     }
 
     dispose(gl) {

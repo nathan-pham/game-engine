@@ -1,3 +1,5 @@
+import engine from "../engine.js"
+
 const geometryVertices = {
     square: {
         points: [
@@ -11,23 +13,22 @@ const geometryVertices = {
 }
 
 export default class VertexBuffer {
-    constructor(type="square", canvas) {
+    constructor(type="square") {
         if(!geometryVertices.hasOwnProperty(type)) {
             throw new Error("unknown vertex buffer type")
         }
 
         const geometry = geometryVertices[type]
-        const gl = canvas.gl
+        const gl = engine.gl
 
         this.size = geometry.size
-
-
         this.buffer = gl.createBuffer()
         this.bind(gl)
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(geometry.points), gl.STATIC_DRAW)
     }
 
-    bind(gl) {
+    bind() {
+        const gl = engine.gl
         gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer)
     }
 }

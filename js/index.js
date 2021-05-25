@@ -1,24 +1,22 @@
-import Canvas from "./classes/Canvas.js"
 import ShaderLoader from "./classes/shader/Loader.js"
 import ShaderLinker from "./classes/shader/Linker.js"
 import VertexBuffer from "./classes/VertexBuffer.js"
+import engine from "./engine.js"
 
-const canvas = new Canvas({ target: "canvas" })
-const gl = canvas.gl
+const gl = engine.gl
+const vertexShader = await new ShaderLoader("VertexShader", gl.VERTEX_SHADER).load()
+const fragmentShader = await new ShaderLoader("FragmentShader", gl.FRAGMENT_SHADER).load()
 
-const vertexShader = await new ShaderLoader("VertexShader", gl.VERTEX_SHADER).load(gl)
-const fragmentShader = await new ShaderLoader("FragmentShader", gl.FRAGMENT_SHADER).load(gl)
+const linker = new ShaderLinker(vertexShader, fragmentShader).link()
 
-const program = new ShaderLinker(vertexShader, fragmentShader).link(gl)
+const vertexBuffer = new VertexBuffer("square")
 
-const vertexBuffer = new VertexBuffer("square", canvas)
+const vertexPosition = gl.getAttribLocation(linker.program, "aVertexPosition")
+const pixelColor = gl.getUniformLocation(linker.program, "uPixelColor")
 
-const vertexPosition = gl.getAttribLocation(program, "aVertexPosition")
-const pixelColor = gl.getUniformLocation(program, "uPixelColor")
+engine.clear()
+engine.use(linker)
 
-canvas.clear()
-
-gl.useProgram(program)
 gl.enableVertexAttribArray(vertexPosition)
 gl.uniform4fv(pixelColor, [1, 0, 0.5, 1])
 

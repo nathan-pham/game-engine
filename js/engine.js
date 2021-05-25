@@ -1,0 +1,5 @@
+import Canvas from "./classes/Canvas.js"
+
+const canvas = new Canvas({ target: "#canvas" })
+
+export default canvas
